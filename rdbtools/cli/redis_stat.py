@@ -102,10 +102,11 @@ class MyStatsAggregator():
             self.stat2d[k]['cnt'] += 1
             self.stat2d[k]['mem'] += record.bytes
 
-            if record.ttl == -1:
+            try:
+                ttl = getattr(record, 'ttl')
+                self.stat2d[k]['z_sum_expire'] += ttl
+            except AttributeError:
                 self.stat2d[k]['z_cnt_no_expire'] += 1
-            else:
-                self.stat2d[k]['z_sum_expire'] += record.ttl
 
         #self.add_aggregate('key_group_count', ns, 1)
         #self.add_aggregate('key_group_memory', ns, record.bytes)
