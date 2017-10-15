@@ -1,3 +1,7 @@
+# Differences from upstream redis-rdb-tools
+
+Added a try block when checking the ttl of a record to avoid causing an `AttributeError` when a record doesn't have a ttl set.
+
 # add by idning: rdbtools/cli/redis_stat.py
 
 ::
